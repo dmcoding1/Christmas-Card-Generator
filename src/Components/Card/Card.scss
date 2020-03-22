@@ -1,0 +1,228 @@
+.card-wrapper {
+  --light: #E6D8F1;
+  --medium-light: #C153C3;
+  --medium: #9791BE;
+  --medium-dark: #6015BE;
+  --medium-dark-shadow: #6015BE40;
+  --dark: #000000;
+
+  width: 120rem;
+  height: 80rem;
+  max-height: 100%;
+  margin: 0 auto;
+  background-color: var(--light);
+  box-shadow: 0 0 2px var(--medium-dark-shadow);
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+
+  &-decorator {
+    position: absolute;
+    width: 8rem;
+    height: 8rem;
+
+    g {
+      rect {
+        fill: var(--medium-dark);
+      }
+    }
+
+    &--before {
+      top: 2.8rem;
+      left: 2.5rem;
+    }
+  
+    &--after {
+      bottom: 2.8rem;
+      right: 2.5rem;
+    }
+  }
+
+  .card-text {
+    width: 50%;
+    height: 100%;
+    max-height: 100%;
+    position: relative;
+    color: var(--dark);
+    
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 19.4rem;
+      left: 5.2rem;
+      width: 17.7rem;
+      height: 17.7rem;
+      border-radius: 50%;
+      background-color: var(--medium-light);
+      opacity: 0.44;
+    }
+
+    input.heading, textarea.main-text, input.signature {
+      border: none;
+      border-bottom: 1px solid grey;
+      background: rgba(255, 255, 255, 0.2);
+      outline: none;
+    }
+
+    textarea.main-text {
+      font-size: 3.2rem;
+      height: 31.5rem;
+      resize: none;
+    }
+
+    .heading, .main-text, .signature {
+      position: absolute;
+      left: 10rem;
+      width: 40rem;
+      overflow-wrap: break-word;
+      font-size: 3.2rem;
+    }
+
+    .heading {
+      top: 14rem;
+      padding-left: 0.5rem;
+    }
+
+    .main-text {
+      top: 24rem;
+      padding-left: 0.5rem;
+    }
+
+    .signature {
+      top: 67rem;
+      text-align: right;
+    }
+  }
+
+  .separator {
+    height: 100%;
+    width: 1rem;
+    background-color: var(--medium);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+
+  .card-image {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    max-height: 100%;
+    opacity: 0.95;
+
+    .image-loader {
+      display: none;
+      width: 10rem;
+      height: 10rem;
+      border: .5rem solid var(--light);
+      border-top: 0.5rem solid var(--dark);
+      border-bottom: 0.5rem solid var(--dark);
+    }
+  }  
+
+  .card-btn {
+    opacity: 0.8;
+    position: relative;
+    top: 5%;
+    left: 50%;
+    outline: none;
+    transform: translate(-50%);  
+    
+    &:hover, &:focus {
+      opacity: 1;
+    }
+  }
+
+  .change-img-btn {
+    position: absolute;
+    height: 100%;
+    width: 5%;
+    top: 0;
+    border-radius: 0;
+    background-color: var(--light);
+    box-shadow: none;
+    outline: none;
+    opacity: 0.3;
+
+    svg {
+      width: 9.7rem;
+      display: block;
+      position: absolute;
+      transform-origin: center;      
+      
+      path {
+        fill: var(--dark);
+      }
+    }
+
+    &:hover, &:focus {
+      opacity: 0.75;
+    }    
+  }
+
+  .change-img-btn__right {
+    right: 0;
+
+    svg {
+      left: -1rem;
+      transform: rotate(-90deg);
+    }
+  }
+
+  .change-img-btn__left {
+    left: 0%;
+
+    svg {
+      right: -1rem;
+      transform: rotate(90deg);
+    }
+  }
+
+  [type="file"] {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    outline: none;
+    width: 1px;
+  }
+   
+  [type="file"] + label {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: block;
+    text-align: center;
+    background-color: var(--light);
+    opacity: 0.3;
+    cursor: pointer; 
+    outline: none;   
+    transition: opacity 0.3s ease-in-out;
+                
+    svg {
+      width: 5rem;
+      transition: transform 0.3s ease-in-out;
+
+      path {
+        fill: var(--dark);
+      }
+    }
+  }
+    
+  [type="file"]:focus + label,
+  [type="file"] + label:hover {
+      opacity: 0.75;
+  }
+
+  [type="file"] + label:hover svg,
+  [type="file"]:focus + label svg {
+    transform: scale(1.1);
+  }
+
+}
