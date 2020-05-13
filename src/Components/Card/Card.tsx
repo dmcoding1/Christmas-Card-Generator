@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from "react";
-import './Card.scss';
-import Arrow from '../Layout/Arrow';
+
+import Arrow from '../Arrow/Arrow';
 import AppContext from "../../Context/AppContext";
 import CardDecorator from "./CardDecorator";
-import { fonts } from "../../Utils/fonts";
+import fonts from "../../Utils/fonts";
+
+import './Card.scss';
 
 class Card extends Component<any> {
   state = {
@@ -51,7 +53,6 @@ class Card extends Component<any> {
     const { heading, text } = fonts[this.context.currentFontsIndex];
 
     return (
-      <Fragment>
         <div className="scrolling-wrapper-flexbox">
           <section className="card-wrapper" style={this.appendColorPallete()}>
             <CardDecorator className="card-wrapper-decorator card-wrapper-decorator--before" />
@@ -160,7 +161,6 @@ class Card extends Component<any> {
             <CardDecorator className="card-wrapper-decorator card-wrapper-decorator--after" />
           </section>
         </div>
-      </Fragment>
     );
   }
 }

@@ -1,4 +1,4 @@
-export const fonts = [
+const fonts = [
   {
     heading: "Open Sans Condensed",
     text: "Open Sans"
@@ -41,24 +41,4 @@ export const fonts = [
   }
 ];
 
-// const allFonts = [];
-
-// fonts.forEach(obj => {
-//   allFonts.push(...Object.values(obj))
-// });
-
-
-
-//let fontCss = '';
-
-// allFonts.forEach(font => {
-//   fontCss += `
-//   @font-face {
-//     font-family: '${font}';
-//     font-style: normal;
-//     font-weight: ${font === 'Roboto Thin' ? 100 : 400};
-//     src: local('${font}'), local('${font.replace(/\s/g, '')}-Regular'), url(/public/Fonts/${font.replace(/\s/g, '')}-Regular.tff);
-//   }
-  
-//   `
-// })
+export default fonts;

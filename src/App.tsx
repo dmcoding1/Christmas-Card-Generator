@@ -1,10 +1,10 @@
 import React from 'react';
 import './Styles/reset.scss';
 import './App.scss';
-import Header from './Components/Layout/Header';
-import Main from './Components/Layout/Main';
-import Footer from './Components/Layout/Footer';
-import Canvas from './Components/Canvas/Canvas';
+import Header from './Components/Header';
+import Main from './Components/Main';
+import Footer from './Components/Footer';
+import Canvas from './Components/Canvas';
 import AppContextProvider from './Context/AppContextProvider';
 
 const App: React.FC = () => {

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+
 import './Canvas.scss';
 import { init } from '../../Utils/canvas'
 

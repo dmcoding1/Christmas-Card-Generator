@@ -1,56 +1,63 @@
 import React, { useState, useContext } from "react";
+
+import AppContext from "../../Context/AppContext";
+import Arrow from "../Arrow/Arrow";
+import Card from "../Card/Card";
+import Palette from "./Palette";
+
+import palettes from "../../Utils/palettes";
+import fonts from "../../Utils/fonts";
 import "../../Styles/fonts.scss";
 import "./Main.scss";
-import Arrow from "./Arrow";
-import Card from "../Card/Card";
-import palettes from "../../Utils/palettes";
-import { fonts } from "../../Utils/fonts";
-import AppContext from "../../Context/AppContext";
 
 const Main: React.FC<any> = () => {
   const context: any = useContext(AppContext);
 
-  const [stylePalettes, setStylePalettes] = useState({
+  const numberOfPaletteGroups = palettes.length % 5 ? Math.floor(palettes.length / 5 + 1) : palettes.length / 5;
+  const lastFontIndex = fonts.length - 1;
+  const cssPalettesAndFontsHeight = 6.4;
+
+  const [paletteGroupStyle, setpaletteGroupStyle] = useState({
     styleCssPalettes: {},
     currentDistancePalettes: 0
   });
 
-  const [styleFonts, setStyleFonts] = useState({
+  const [fontGroupStyle, setfontGroupStyle] = useState({
     styleCssFonts: {},
     currentDistanceFonts: 0
   });
 
   const translatePalettes = (distance: number) => {
     if (
-      stylePalettes.currentDistancePalettes + distance >
-        5 * -Math.abs(distance) &&
-      stylePalettes.currentDistancePalettes + distance <= 0
+      paletteGroupStyle.currentDistancePalettes + distance >
+      numberOfPaletteGroups * -Math.abs(distance) &&
+      paletteGroupStyle.currentDistancePalettes + distance <= 0
     ) {
       return () =>
-        setStylePalettes({
+        setpaletteGroupStyle({
           styleCssPalettes: {
-            ...stylePalettes.styleCssPalettes,
-            transform: `translateY(${stylePalettes.currentDistancePalettes +
+            ...paletteGroupStyle.styleCssPalettes,
+            transform: `translateY(${paletteGroupStyle.currentDistancePalettes +
               distance}rem)`
           },
           currentDistancePalettes:
-            stylePalettes.currentDistancePalettes + distance
+            paletteGroupStyle.currentDistancePalettes + distance
         });
     }
   };
 
   const translateFonts = (distance: number) => {
     if (
-      styleFonts.currentDistanceFonts + distance > 9 * -Math.abs(distance) &&
-      styleFonts.currentDistanceFonts + distance <= 0
+      fontGroupStyle.currentDistanceFonts + distance > lastFontIndex * -Math.abs(distance) &&
+      fontGroupStyle.currentDistanceFonts + distance <= 0
     ) {
-      setStyleFonts({
+      setfontGroupStyle({
         styleCssFonts: {
-          ...styleFonts.styleCssFonts,
-          transform: `translateY(${styleFonts.currentDistanceFonts +
+          ...fontGroupStyle.styleCssFonts,
+          transform: `translateY(${fontGroupStyle.currentDistanceFonts +
             distance}rem)`
         },
-        currentDistanceFonts: styleFonts.currentDistanceFonts + distance
+        currentDistanceFonts: fontGroupStyle.currentDistanceFonts + distance
       });
     }
   };
@@ -70,28 +77,21 @@ const Main: React.FC<any> = () => {
     });
   };
 
-  function generatePalletes() {
+  const generatePalletes = () => {
     let results = [];
-    for (let i = 0; i < 25; i = i + 5) {
+    for (let i = 0; i < palettes.length + 4; i = i + 5) {
       results.push(
         <div key={i} className="palette-group">
           {palettes.slice(i, i + 5).map(palette => {
-            const { light, mediumLight, medium, mediumDark, dark } = palette;
             return (
-              <li
-                key={medium}
-                className="palette"
-                style={{
-                  background: `linear-gradient(to right, ${light} 20%, ${mediumLight} 20%, ${mediumLight} 40%, ${medium} 40%, ${medium} 60%, ${mediumDark} 60%, ${mediumDark} 80%, ${dark} 80%)`
-                }}
+              <Palette
+                key={Math.random()}
+                palette={palette}
                 onClick={() => context.setPalette(palette)}
-                onKeyUp={event => {
+                onKeyUp={(event: KeyboardEvent) => {
                   if (event.key === "Enter") context.setPalette(palette);
                 }}
-                tabIndex={0}
-                role="button"
-                title="Select palette"
-              ></li>
+              ></Palette>
             );
           })}
         </div>
@@ -109,23 +109,23 @@ const Main: React.FC<any> = () => {
           <div className="palette-selection-wrapper">
             <div className="divider"></div>
             <div className="palettes-container">
-              {stylePalettes.currentDistancePalettes <= -6.4 && (
+              {paletteGroupStyle.currentDistancePalettes <= -cssPalettesAndFontsHeight && (
                 <button
                   className="arrow arrow-up"
-                  onClick={translatePalettes(6.4)}
+                  onClick={translatePalettes(cssPalettesAndFontsHeight)}
                 >
                   <Arrow />
                 </button>
               )}
 
-              <ul className="palettes" style={stylePalettes.styleCssPalettes}>
+              <ul className="palettes" style={paletteGroupStyle.styleCssPalettes}>
                 {generatePalletes()}
               </ul>
             </div>
-            {stylePalettes.currentDistancePalettes >= -6.4 * 3 && (
+            {paletteGroupStyle.currentDistancePalettes > -cssPalettesAndFontsHeight * (numberOfPaletteGroups - 1) && (
               <button
                 className="arrow arrow-down"
-                onClick={translatePalettes(-6.4)}
+                onClick={translatePalettes(-cssPalettesAndFontsHeight)}
               >
                 <Arrow />
               </button>
@@ -138,26 +138,26 @@ const Main: React.FC<any> = () => {
           <div className="fonts-selection-wrapper">
             <div className="divider"></div>
             <div className="fonts-container">
-              {styleFonts.currentDistanceFonts <= -6.4 && (
+              {fontGroupStyle.currentDistanceFonts <= -cssPalettesAndFontsHeight && (
                 <button
                   className="arrow arrow-up"
                   onClick={() => {
-                    translateFonts(6.4);
+                    translateFonts(cssPalettesAndFontsHeight);
                     context.decrementCurrentFontsIndex();
                   }}
                 >
                   <Arrow />
                 </button>
               )}
-              <ul className="fonts" style={styleFonts.styleCssFonts}>
+              <ul className="fonts" style={fontGroupStyle.styleCssFonts}>
                 {generateFonts()}
               </ul>
             </div>
-            {styleFonts.currentDistanceFonts >= -6.4 * 8 && (
+            {fontGroupStyle.currentDistanceFonts >= -cssPalettesAndFontsHeight * (lastFontIndex - 1) && (
               <button
                 className="arrow arrow-down"
                 onClick={() => {
-                  translateFonts(-6.4);
+                  translateFonts(-cssPalettesAndFontsHeight);
                   context.incrementCurrentFontsIndex();
                 }}
               >
