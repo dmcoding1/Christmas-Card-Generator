@@ -3,6 +3,10 @@ import AppContext from './AppContext';
 import Unsplash from './../Unsplash';
 import htmlToImage from 'html-to-image';
 
+interface HTMLInputEvent extends Event {
+    target: HTMLInputElement & EventTarget;
+}
+
 class AppContextProvider extends Component {
     state = {
         editModeOn: true,
@@ -115,7 +119,9 @@ class AppContextProvider extends Component {
         cardImage.classList.add('animate');
     }
 
-    uploadImage = (e: any) => {
+    uploadImage = (e: HTMLInputEvent) => {
+        if (!e.target) return;
+
         const input = e.target;
         const reader = new FileReader();
         this.showImageLoader();
@@ -126,7 +132,8 @@ class AppContextProvider extends Component {
             this.hideImageLoader();
             this.animateImage();
         };
-        reader.readAsDataURL(input.files[0]);
+        ;
+        reader.readAsDataURL((input.files as FileList)[0]);
     }
 
     downloadCard = () => {
@@ -134,8 +141,8 @@ class AppContextProvider extends Component {
         this.setState({isDownloading: true});
         this.disableEdit();
         const card = (document.querySelector('.card-wrapper') as HTMLElement)
-        htmlToImage.toJpeg(card, { quality: 0.95 })
-            .then((dataUrl: any) => {
+        htmlToImage.toJpeg(card, { quality: 1 })
+            .then((dataUrl: string) => {
                 const link = document.createElement('a');
                 link.download = 'my-christmas-card.jpeg';
                 link.href = dataUrl;

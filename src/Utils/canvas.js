@@ -1,5 +1,6 @@
 export const init = canvas => {
-  //const canvas = document.querySelector('canvas');
+  if (!canvas) return;
+  
   const c = canvas.getContext('2d');
 
   let { innerWidth } = window;

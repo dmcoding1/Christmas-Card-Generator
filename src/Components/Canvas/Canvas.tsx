@@ -4,10 +4,12 @@ import './Canvas.scss';
 import { init } from '../../Utils/canvas'
 
 const Canvas: React.FC = () => {
-    const canvasNode: any = useRef();
+    const canvasNode = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
-      (window as any).onload = setTimeout(() => init(canvasNode.current), 1000);
+      if (canvasNode.current) {
+        setTimeout(() => init(canvasNode.current), 1000);
+      }      
     });
 
     return (

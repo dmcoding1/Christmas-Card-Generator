@@ -89,7 +89,8 @@ const Main: React.FC<any> = () => {
                 palette={palette}
                 onClick={() => context.setPalette(palette)}
                 onKeyUp={(event: KeyboardEvent) => {
-                  if (event.key === "Enter") context.setPalette(palette);
+                  event.preventDefault();
+                  if (event.key === "Enter" || event.key === " ") context.setPalette(palette);
                 }}
               ></Palette>
             );

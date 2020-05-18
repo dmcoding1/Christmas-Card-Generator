@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, createRef } from "react";
 
-import Arrow from '../Arrow/Arrow';
+import Arrow from "../Arrow/Arrow";
 import AppContext from "../../Context/AppContext";
 import CardDecorator from "./CardDecorator";
 import fonts from "../../Utils/fonts";
 
-import './Card.scss';
+import "./Card.scss";
 
 class Card extends Component<any> {
   state = {
@@ -14,30 +14,34 @@ class Card extends Component<any> {
     signature: ""
   };
 
+  private inputFile = createRef<HTMLInputElement>();
+
   appendColorPallete = (): React.CSSProperties => {
     if (
       this.context.currentPalette &&
       Object.keys(this.context.currentPalette).length > 0
     ) {
       return {
-        ["--light" as any]: this.context.currentPalette.light,
-        ["--medium-light" as any]: this.context.currentPalette.mediumLight,
-        ["--medium" as any]: this.context.currentPalette.medium,
-        ["--medium-dark" as any]: this.context.currentPalette.mediumDark,
-        ["--medium-dark-shadow" as any]:
+        ["--light" as string]: this.context.currentPalette.light,
+        ["--medium-light" as string]: this.context.currentPalette.mediumLight,
+        ["--medium" as string]: this.context.currentPalette.medium,
+        ["--medium-dark" as string]: this.context.currentPalette.mediumDark,
+        ["--medium-dark-shadow" as string]:
           this.context.currentPalette.mediumDark + 40,
-        ["--dark" as any]: this.context.currentPalette.dark
+        ["--dark" as string]: this.context.currentPalette.dark
       };
     }
 
     return {};
   };
 
-  componentDidMount() {
-    const fileInput = (document.getElementById('file') as HTMLElement);
-    fileInput.addEventListener('focus', () => fileInput.classList.add( 'has-focus' ));
-    fileInput.addEventListener('blur', () => fileInput.classList.remove( 'has-focus' ));
+  componentDidMount() {    
+    const fileInput = this.inputFile.current!;
+
+    fileInput.addEventListener("focus", () => fileInput.classList.add("has-focus"));
+    fileInput.addEventListener("blur", () => fileInput.classList.remove("has-focus"));
   }
+
 
   render() {
     const cardStyle = {
@@ -137,7 +141,7 @@ class Card extends Component<any> {
               )}
               {this.context.editModeOn && (
                 <Fragment>
-                  <input type="file" id="file" accept='image/*' onChange={this.context.uploadImage} />
+                  <input ref={this.inputFile} type="file" id="file" accept="image/*" onChange={this.context.uploadImage} />
                   <label htmlFor="file" title="Upload image">
                     <svg width="100" height="91" viewBox="0 0 100 91" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M52.8357 1.11945C51.8602 0.14242 50.2772 0.141246 49.3002 1.11683L33.3785 17.0149C32.4015 17.9905 32.4003 19.5734 33.3759 20.5505C34.3515 21.5275 35.9344 21.5287 36.9114 20.5531L51.064 6.42144L65.1957 20.5741C66.1713 21.5511 67.7542 21.5523 68.7312 20.5767C69.7083 19.6011 69.7094 18.0182 68.7338 17.0411L52.8357 1.11945ZM0.5 63V74H5.5V63H0.5ZM18 91.5H83V86.5H18V91.5ZM100.5 74V63H95.5V74H100.5ZM83 91.5C92.665 91.5 100.5 83.665 100.5 74H95.5C95.5 80.9036 89.9036 86.5 83 86.5V91.5ZM0.5 74C0.5 83.665 8.33502 91.5 18 91.5V86.5C11.0964 86.5 5.5 80.9036 5.5 74H0.5ZM53.5213 64.1159L53.5667 2.88776L48.5667 2.88406L48.5213 64.1122L53.5213 64.1159Z" fill="black"/>

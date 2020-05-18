@@ -1,8 +1,8 @@
 import React from 'react';
 
-const CardDecorator: React.FC<any> = (props: any) => {
+const CardDecorator: React.FC<{className: string}> = ({className}) => {
     return (
-        <svg width="78" height="85" viewBox="0 0 78 85" fill="none" className={props.className} xmlns="http://www.w3.org/2000/svg">
+        <svg width="78" height="85" viewBox="0 0 78 85" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_c)">
                 <rect width="26.2674" height="61.5042" rx="13.1337" transform="matrix(0.692158 0.721746 -0.692158 0.721746 51.7091 0)" fill="#6015BE"/>
                 <rect width="26.2674" height="46.7688" rx="13.1337" transform="matrix(0.692158 0.721746 -0.692158 0.721746 59.8187 31.5162)" fill="#6015BE"/>

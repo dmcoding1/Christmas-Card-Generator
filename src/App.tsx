@@ -1,11 +1,13 @@
 import React from 'react';
-import './Styles/reset.scss';
-import './App.scss';
+
+import AppContextProvider from './Context/AppContextProvider';
+import Canvas from './Components/Canvas';
+import Footer from './Components/Footer';
 import Header from './Components/Header';
 import Main from './Components/Main';
-import Footer from './Components/Footer';
-import Canvas from './Components/Canvas';
-import AppContextProvider from './Context/AppContextProvider';
+
+import './Styles/reset.scss';
+import './App.scss';
 
 const App: React.FC = () => {
 

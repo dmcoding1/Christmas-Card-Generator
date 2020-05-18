@@ -1,7 +1,21 @@
-import React from "react";
+import React, { EventHandler } from "react";
+
+type Palette = {
+  light: string,
+  mediumLight: string, 
+  medium: string,
+  mediumDark: string,
+  dark: string
+}
+
+interface PaletteProps {
+  onClick: () => void;
+  onKeyUp: (event: any) => void;
+  palette: Palette
+}
 
 
-const Palette: React.FC<any> = ({onClick, onKeyUp, palette}) => {
+const Palette: React.FC<PaletteProps> = ({onClick, onKeyUp, palette}) => {
   const { light, mediumLight, medium, mediumDark, dark } = palette;
 
   return (
