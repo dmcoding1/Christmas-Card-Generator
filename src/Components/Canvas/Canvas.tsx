@@ -7,9 +7,9 @@ const Canvas: React.FC = () => {
     const canvasNode = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
-      if (canvasNode.current) {
-        setTimeout(() => init(canvasNode.current), 1000);
-      }      
+      if (canvasNode.current) {        
+        setTimeout(() => init(canvasNode.current), 1000);        
+      }
     });
 
     return (

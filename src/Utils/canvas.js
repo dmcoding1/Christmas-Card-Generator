@@ -20,19 +20,15 @@ export const init = canvas => {
 
   const colors = ['#91E2ED', '#91C1ED', '#77E8DA', '#91C7ED'];
 
-  window.addEventListener('resize', () => {
-    let { innerWidth } = window;
-    
-    canvas.width = innerWidth;
-    canvas.height = document.querySelector("#root").clientHeight;
+  const handleResize = (canvas) => {
+    const c = canvas.getContext('2d');
+    c.clearRect(0, 0, canvas.width, canvas.height);
+  
+    init(canvas);
+  }
 
-    WIDTH = innerWidth;
-    HEIGHT = document.querySelector("#root").clientHeight;
-
-    canvas.style.width = innerWidth + "px"; 
-    canvas.style.height = document.querySelector("#root").clientHeight + "px";
-
-    init();
+  window.addEventListener('resize', (e) => {
+    handleResize(canvas);  
   })
 
   class Snowflake {

@@ -222,9 +222,11 @@
     flex-direction: column;
   }
 
-  .palette-selection {
+  .palette-selection, .font-selection {
     margin-bottom: 3rem;
   }  
+
+  
 }
 
 @media (max-width: 767px) {
@@ -250,6 +252,14 @@
       }
     }
   }
+
+  .fonts-selection-wrapper {
+    width: 100%;
+  }
+
+  .font-pair {
+    font-size: 1.6rem;
+  }
   
 }
 
@@ -263,6 +273,21 @@
         width: 66%;        
       }
     }
+  }
+}
+
+@media (max-width: 500px) {
+
+  .palette-selection, .fonts-selection {
+    width: 100%;
+  }
+
+  .card-wrapper .card-text .heading, .card-wrapper .card-text .main-text, .card-wrapper .card-text .signature {
+    left: 20%;
+  }
+
+  .footer h3 {
+    font-size: 1.5rem;
   }
 }
 

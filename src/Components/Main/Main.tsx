@@ -138,7 +138,6 @@ const Main: React.FC<any> = () => {
           <h2 className="selection-text">Choose Fonts</h2>
           <div className="fonts-selection-wrapper">
             <div className="divider"></div>
-            <div className="fonts-container">
               {fontGroupStyle.currentDistanceFonts <= -cssPalettesAndFontsHeight && (
                 <button
                   className="arrow arrow-up"
@@ -150,6 +149,7 @@ const Main: React.FC<any> = () => {
                   <Arrow />
                 </button>
               )}
+            <div className="fonts-container">
               <ul className="fonts" style={fontGroupStyle.styleCssFonts}>
                 {generateFonts()}
               </ul>
