@@ -78,10 +78,10 @@
   opacity: 0.75;
   cursor: pointer;
   transition: opacity 0.3s ease-in-out;
-}
 
-.palette:hover, .palette:focus {
-  opacity: 1;
+  &:hover, &:focus, &:active {
+    opacity: 1;
+  }
 }
 
 .arrow {
@@ -186,7 +186,6 @@
   flex-wrap: nowrap;
   overflow-x: auto;
   height: 80rem;
-  -webkit-overflow-scrolling: touch;
 }
 
 .fetching-error-msg {
@@ -278,16 +277,34 @@
 
 @media (max-width: 500px) {
 
+  .scrolling-wrapper-flexbox {
+    height: 70rem;
+  }
+
   .palette-selection, .fonts-selection {
     width: 100%;
+  }
+  
+  .card-wrapper {
+    height: 70rem;
   }
 
   .card-wrapper .card-text .heading, .card-wrapper .card-text .main-text, .card-wrapper .card-text .signature {
     left: 20%;
   }
 
+  .card-wrapper .card-text .signature {
+    top: 60rem;
+  }  
+
   .footer h3 {
     font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .card-wrapper .card-btn {
+    left: 70%;
   }
 }
 
