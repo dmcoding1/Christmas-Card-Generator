@@ -1,6 +1,5 @@
 import Unsplash from 'unsplash-js';
-import {apiKey} from './keys';
 
-const unsplash = new Unsplash({ accessKey: apiKey });
+const unsplash = new Unsplash({ accessKey: process.env.REACT_APP_API_KEY });
 
 export default unsplash;
