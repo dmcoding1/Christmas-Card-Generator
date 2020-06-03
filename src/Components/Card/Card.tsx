@@ -111,6 +111,9 @@ class Card extends Component<any> {
                     placeholder="Yours..."
                     value={this.state.signature ? this.state.signature : ""}
                   />
+                  <div className="scroll-indicator">
+                    <Arrow />
+                  </div>
                 </Fragment>
               )}
               {!this.context.editModeOn && (
