@@ -28,7 +28,7 @@ export const init = canvas => {
   }
 
   window.addEventListener('resize', (e) => {
-    handleResize(canvas);  
+    if (window.innerWidth > 600) handleResize(canvas);  
   })
 
   class Snowflake {
